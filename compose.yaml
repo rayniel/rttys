@@ -1,0 +1,29 @@
+services:
+  rttys:
+    image: ghcr.io/rayniel/rttys:latest
+    pull_policy: always
+    restart: unless-stopped
+    command:
+      - --addr-http-proxy
+      - :5914
+      - --token
+      - ${RTTYS_TOKEN:?Set RTTYS_TOKEN in .env}
+      - --password
+      - ${RTTYS_PASSWORD:?Set RTTYS_PASSWORD in .env}
+      - --share-host-key
+      - /var/lib/rttys/ssh_host_ed25519_key
+      - --share-port-start
+      - "20000"
+      - --share-port-end
+      - "21000"
+    ports:
+      - "5912:5912"
+      - "5913:5913"
+      - "5914:5914"
+      - "20000-21000:20000-21000"
+    volumes:
+      - rttys-data:/var/lib/rttys
+    stop_grace_period: 30s
+
+volumes:
+  rttys-data:

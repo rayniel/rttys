@@ -5,7 +5,7 @@ on:
     - cron: '23 3 * * *'
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [docker-images]
     paths:
       - .github/workflows/release.yml
 

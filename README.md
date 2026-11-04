@@ -4,6 +4,9 @@
 
 This fork distributes unmodified source from `zhaojh329/rttys` to
 `ghcr.io/rayniel/rttys`, for both `linux/amd64` and `linux/arm64`.
+The `master` branch tracks upstream; this workflow and its documentation live
+on the `docker-images` default branch so the scheduled workflow can run without
+adding distribution changes to `master`.
 
 | Tag | Source |
 | --- | --- |

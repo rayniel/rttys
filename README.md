@@ -1,5 +1,38 @@
 # rttys
 
+## Docker image distribution
+
+This fork distributes unmodified source from `zhaojh329/rttys` to
+`ghcr.io/rayniel/rttys`, for both `linux/amd64` and `linux/arm64`.
+
+| Tag | Source |
+| --- | --- |
+| `latest` | Latest upstream non-prerelease release |
+| `5.6.0` (example) | Corresponding upstream release tag, without the `v` prefix |
+| `edge` | Latest upstream `master` commit |
+| `edge-<full commit SHA>` | Corresponding upstream `master` commit |
+
+```sh
+docker pull ghcr.io/rayniel/rttys:latest
+docker pull ghcr.io/rayniel/rttys:edge
+```
+
+The **Distribute upstream Docker images** workflow runs daily at 03:23 UTC
+and can also be started using **Actions > Run workflow**. It resolves upstream
+refs to exact commits before building with the upstream Dockerfile. No fork
+sync or Docker Hub credentials are required; publishing uses `GITHUB_TOKEN`
+with `packages: write`. The fork's own code changes are not included in these
+images. Daily builds also refresh dependencies allowed by the upstream Dockerfile;
+use the published digest to pin an exact image.
+
+Enable Actions on this fork if GitHub has disabled them. After the first
+successful publication, set the `rttys` package visibility to **Public** in its
+GitHub package settings to allow anonymous pulls. GitHub creates new GHCR
+packages as private by default. Public repositories' scheduled workflows may
+be disabled after 60 days without repository activity; re-enable the workflow
+if needed. Changes to upstream build paths or release tag conventions may
+require updating this workflow.
+
 [1]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=plastic
 [2]: /LICENSE
 [3]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=plastic
